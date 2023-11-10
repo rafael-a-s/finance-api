@@ -25,6 +25,8 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     implementation 'org.modelmapper:modelmapper:2.1.1'
     implementation group: 'io.quarkus', name: 'quarkus-oidc', version: '3.4.0'
+    implementation 'io.quarkus:quarkus-smallrye-jwt'
+    implementation 'io.quarkus:quarkus-smallrye-jwt-build'
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
