@@ -1,0 +1,70 @@
+@startuml
+
+class User {
+    - String id
+    - String fristName
+    - String lastName
+    - String cpf
+    - String email
+    - String password
+}
+
+note top of FinanceControl
+    getWageMonth() -> Salário total do mês, aqui deve retornar
+    todo dinheiro certo que vai entrar no mês
+    getTotalSpentFixedMonth() -> Total de despensas fixas do mês
+    getInvestimentMonth() -> Total de investimentos externos mensal
+    getSubTotalMonth() -> Total de dinheiro que irá me sobrar no mês
+    getTotalToSpendForTheWeek() -> Total de dinheiro que posso gastar por semana,
+    pega o subtotal e divide por 4 e terá o total para gastar em uma semana
+end note
+class FinanceControl {
+    - String id
+    - Remuneration[] remuneration
+    - Expense[] expenseFixeds
+    - MonthlyContribution[] monthlyContribution
+
+    + BigDecimal getRemunerationMonth()
+    + BigDecimal getTotalExpenseFixedMonth()
+    + BigDecimal getInvestimentMonth()
+    + BigDecimal getSubTotalMonth()
+    + BigDecimal getTotalToSpendForTheWeek()
+}
+
+class MonthlyContribution {
+    - String id
+    - String nameInvestiment
+    - BigDecimal value
+}
+
+class Remuneration {
+    - String id
+    - String provider
+    - BigDecimal value
+    - TypeRemunerationProvider typeWageProvider
+}
+
+note top of TypeRemunerationProvider
+    Aqui ficaram os tipos de provedores de dinheiro
+    Tipo - Estágio, Free lancer, Contrato e Clt
+end note
+enum TypeRemunerationProvider {
+    - Integer id
+    - String label
+}
+
+User --> FinanceControl
+FinanceControl --> Remuneration
+FinanceControl --> MonthlyContribution
+Remuneration --> TypeRemunerationProvider
+
+class Expense {
+    - String id
+    - String name
+    - Integer dayDiscount
+    - BigDecimal value
+}
+
+FinanceControl --> Expense
+
+@enduml
