@@ -1,6 +1,6 @@
 package com.arquiteture.domain.enums;
 
-public enum TypeWageProvider {
+public enum TypeRemunerationProvider {
     INTERNSHIP(1, "Estágio"),
     FREELANCER(2, "Freelancer"),
     CONTRACT(3, "Contrato"),
@@ -10,7 +10,7 @@ public enum TypeWageProvider {
     private Integer id;
     private String label;
 
-    TypeWageProvider(Integer id, String label) {
+    TypeRemunerationProvider(Integer id, String label) {
         this.id = id;
         this.label = label;
     }
