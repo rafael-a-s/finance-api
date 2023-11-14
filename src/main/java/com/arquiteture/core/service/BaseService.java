@@ -2,7 +2,7 @@ package com.arquiteture.core.service;
 
 import com.arquiteture.core.entity.BaseEntity;
 import com.arquiteture.core.exception.DomainException;
-import com.arquiteture.core.repository.BaseRepository;
+import com.arquiteture.core.repository.IBaseRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.modelmapper.Condition;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
 
     @Inject
-    BaseRepository<T> repository;
+    IBaseRepository<T> repository;
 
     protected BaseService(){}
 
-    protected BaseService(BaseRepository<T> repository) {
+    protected BaseService(IBaseRepository<T> repository) {
         this.repository = repository;
     }
 
@@ -103,7 +103,7 @@ public abstract class BaseService<T extends BaseEntity> implements IBaseService<
         repository.delete(t);
     }
 
-    public BaseRepository<T> getRepository() {
+    public IBaseRepository<T> getRepository() {
         return this.repository;
     }
 }
