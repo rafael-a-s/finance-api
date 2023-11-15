@@ -1,4 +1,4 @@
-package com.arquiteture.domain.model.expense;
+package com.arquiteture.domain.model.monthlyContribution;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -8,25 +8,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ExpenseRequestDTO {
+@NoArgsConstructor
+public class MonthlyContributionRequestDTO {
 
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
-    @Min(value = 2, message = "validation.expense.name.size.min")
-    @Max(value = 50, message = "validation.expense.name.size.max")
-    private String name;
-
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
-    @Min(value = 1, message = "validation.expense.dayDiscount.size.min")
-    @Max(value = 2, message = "validation.expense.dayDiscount.size.max")
-    private Integer dayDiscount;
+    @Min(value = 2, message = "validation.monthly-contribution.nameInvestiment.size.min")
+    @Max(value = 50, message = "validation.monthly-contribution.nameInvestiment.size.max")
+    private String nameInvestiment;
 
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")

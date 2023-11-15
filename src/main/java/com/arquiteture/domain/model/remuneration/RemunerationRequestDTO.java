@@ -15,17 +15,17 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class RemunerationRequestDTO {
 
-    @NotBlank(message = "validation.field.not-null")
+    @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
     @Min(value = 2, message = "validation.remuneration.provider.size.min")
     @Max(value = 50, message = "validation.remuneration.provider.size.max")
     private String provider;
 
-    @NotBlank(message = "validation.field.not-null")
+    @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
     private BigDecimal value;
 
-    @NotBlank(message = "validation.field.not-null")
+    @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
     private TypeRemunerationProvider typeRemunerationProvider;
 }
