@@ -1,5 +1,6 @@
 package com.arquiteture.domain.model.expense;
 
+import com.arquiteture.domain.model.typeExpense.TypeExpenseResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class ExpenseResponseDTO {
     private String name;
     private Integer dayDiscount;
     private BigDecimal value;
+    private TypeExpenseResponseDTO typeExpense;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private boolean active;

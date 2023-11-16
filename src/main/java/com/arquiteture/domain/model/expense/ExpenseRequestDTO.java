@@ -1,5 +1,6 @@
 package com.arquiteture.domain.model.expense;
 
+import com.arquiteture.core.entity.BaseEntityRequest;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,4 +32,8 @@ public class ExpenseRequestDTO {
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
     private BigDecimal value;
+
+    @NotBlank(message = "validation.field.not-blank")
+    @NotNull(message = "validation.field.not-null")
+    private BaseEntityRequest typeExpense;
 }

@@ -1,10 +1,7 @@
 package com.arquiteture.domain.entity;
 
 import com.arquiteture.core.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +28,10 @@ public class Expense extends BaseEntity {
 
     @Column(name = "expense_value")
     private BigDecimal value;
+
+    @ManyToOne(targetEntity = TypeExpense.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_expense_id")
+    private TypeExpense typeExpense;
 
     @Override
     public String getId() {
