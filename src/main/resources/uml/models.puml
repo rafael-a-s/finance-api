@@ -65,6 +65,13 @@ class Expense {
     - BigDecimal value
 }
 
+class TypeExpense {
+    - String id
+    - String nameOfExpense
+}
+
+Expense --> TypeExpense
+
 FinanceControl --> Expense
 
 @enduml
