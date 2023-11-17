@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends BaseEntity {
 
     @Id
@@ -26,7 +26,7 @@ public class User extends BaseEntity {
     private String password;
 
     @ElementCollection
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id"))
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id_user"))
     @Column(name = "roles", length = 30)
     private Set<Roles> roles;
 

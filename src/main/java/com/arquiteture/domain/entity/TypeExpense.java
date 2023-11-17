@@ -24,7 +24,7 @@ public class TypeExpense extends BaseEntity {
     @Column(name = "name_type_expense")
     private String nameOfExpense;
 
-    @OneToMany(targetEntity = Expense.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "type_expense")
+    @OneToMany(targetEntity = Expense.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "typeExpense")
     private List<Expense> expenses;
 
     @Override

@@ -30,7 +30,7 @@ public class Expense extends BaseEntity {
     private BigDecimal value;
 
     @ManyToOne(targetEntity = TypeExpense.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "type_expense_id")
+    @JoinColumn(name = "type_expense_id", referencedColumnName = "type_expense_id")
     private TypeExpense typeExpense;
 
     @Override
