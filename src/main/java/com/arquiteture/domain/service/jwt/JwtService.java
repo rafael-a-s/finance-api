@@ -28,7 +28,7 @@ public class JwtService implements IJwtService {
                     .collect(Collectors.toSet());
 
             return Jwt.issuer("finance-jwt")
-                    .subject(user.getUsename())
+                    .subject(user.getId())
                     .groups(roles)
                     .expiresAt(expiryDate)
                     .sign();

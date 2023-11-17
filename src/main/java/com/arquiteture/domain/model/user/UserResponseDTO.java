@@ -14,7 +14,11 @@ import java.util.Set;
 public class UserResponseDTO {
 
     private String id;
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String cpf;
+    private String email;
+    private String password;
     private Set<Roles> roles;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;

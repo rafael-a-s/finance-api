@@ -19,8 +19,17 @@ public class User extends BaseEntity {
     @Column(name = "id_user", nullable = false, length = 36)
     private String id;
 
-    @Column(name = "username")
-    private String usename;
+    @Column(name = "first_name", length = 50)
+    private String firstName;
+
+    @Column(name = "last_name", length = 50)
+    private String lastName;
+
+    @Column(name = "cpf", length = 14)
+    private String cpf;
+
+    @Column(name = "email", length = 100)
+    private String email;
 
     @Column(name = "password")
     private String password;

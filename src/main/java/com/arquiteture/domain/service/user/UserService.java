@@ -35,15 +35,6 @@ public class UserService extends BaseService<User> implements IUserService {
     @Override
     public void validate(User entity) throws DomainException {
         super.validate(entity);
-        validUsernameUnique(entity.getUsename());
-    }
-
-    private void validUsernameUnique(String username) throws DomainException {
-        var optionalUser = this.getRepository().findByUsername(username);
-
-        if(optionalUser.isPresent()){
-            throw new DomainException("validation.user.username-exist");
-        }
     }
 
     @Override
