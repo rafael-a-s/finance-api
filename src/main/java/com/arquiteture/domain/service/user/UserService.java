@@ -4,10 +4,13 @@ import com.arquiteture.core.exception.DomainException;
 import com.arquiteture.core.repository.IBaseRepository;
 import com.arquiteture.core.service.BaseService;
 import com.arquiteture.domain.entity.User;
+import com.arquiteture.domain.enums.Roles;
 import com.arquiteture.domain.repository.UserRepository;
 import com.arquiteture.domain.service.hash.IHashService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
+import java.util.HashSet;
 
 
 @ApplicationScoped
@@ -27,6 +30,8 @@ public class UserService extends BaseService<User> implements IUserService {
 
         var passwordHash = hashService.getHashPassword(entity.getPassword());
         entity.setPassword(passwordHash);
+        entity.setRoles(new HashSet<>());
+        entity.getRoles().add(Roles.USER);
 
         this.getRepository().persist(entity);
         return entity;
