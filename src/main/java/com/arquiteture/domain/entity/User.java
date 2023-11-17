@@ -34,9 +34,10 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = Roles.class)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "id_user"))
-    @Column(name = "roles", length = 30)
+    @Column(name = "roles")
+    @Enumerated(EnumType.ORDINAL)
     private Set<Roles> roles;
 
     @Override

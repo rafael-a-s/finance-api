@@ -1,5 +1,11 @@
 package com.arquiteture.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+import java.util.Objects;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Roles {
     ADMIN(1, "admin"),
     USER(2, "user");
@@ -18,5 +24,18 @@ public enum Roles {
 
     public String getLabel() {
         return label;
+    }
+
+    public static Roles valueOf(Integer id) throws IllegalArgumentException {
+        if (Objects.isNull(id)) {
+            return null;
+        }
+        for (Roles role : Roles.values()) {
+            if(role.getId().equals(id)) {
+                return role;
+            }
+        }
+
+        throw new IllegalArgumentException("ID inválido:"+ id);
     }
 }
