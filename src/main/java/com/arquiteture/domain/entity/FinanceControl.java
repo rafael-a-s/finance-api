@@ -7,7 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -29,6 +35,56 @@ public class FinanceControl extends BaseEntity {
 
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "finance_control", orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
+
+    public BigDecimal getRemunerationMonth() {
+
+        return this.remunerations
+                .stream()
+                .map(Remuneration::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal getTotalExpenseFixedMonth() {
+
+        return this.expensesFixes
+                .stream()
+                .map(Expense::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal getInvestimentMonth() {
+
+        return this.monthlyContributions
+                .stream()
+                .map(MonthlyContribution::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal getSubTotalMonth() {
+
+        BigDecimal totalRemuneration = getRemunerationMonth();
+        BigDecimal totalExpenses = getTotalExpenseFixedMonth();
+        BigDecimal totalInvestments = getInvestimentMonth();
+
+        BigDecimal totalMonthlySpending = totalExpenses.add(totalInvestments);
+
+        return totalRemuneration.subtract(totalMonthlySpending);
+    }
+
+    public BigDecimal getTotalToSpendForTheWeek() {
+        LocalDate firstDayOfMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
+        LocalDate lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth());
+
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+
+        int weekNumberStart = firstDayOfMonth.get(weekFields.weekOfYear());
+        int weekNumberEnd = lastDayOfMonth.get(weekFields.weekOfYear());
+
+        int totalWeek = weekNumberEnd - weekNumberStart + 1;
+
+        return getSubTotalMonth()
+                .divide(BigDecimal.valueOf(totalWeek));
+    }
 
     @Override
     public String getId() {
