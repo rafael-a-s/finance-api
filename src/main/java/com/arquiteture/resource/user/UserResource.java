@@ -8,6 +8,7 @@ import com.arquiteture.domain.model.user.UserRequestDTO;
 import com.arquiteture.domain.model.user.UserResponseDTO;
 import com.arquiteture.domain.service.user.IUserService;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -16,6 +17,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @Path("/user")
@@ -35,6 +37,12 @@ public class UserResource extends BaseResource<User, UserRequestDTO, UserRespons
         var entity = getService().create(getMapper().fromRequest(userRequestDTO));
         URI location = URI.create("/user/" + entity.getId());
         return Response.created(location).build();
+    }
+
+    @RolesAllowed("user")
+    @Override
+    public Response update(String id, UserRequestDTO request) throws DomainException, InvocationTargetException, IllegalAccessException {
+        return super.update(id, request);
     }
 
     @Override
