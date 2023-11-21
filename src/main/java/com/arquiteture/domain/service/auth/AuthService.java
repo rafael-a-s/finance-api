@@ -1,61 +1,60 @@
 package com.arquiteture.domain.service.auth;
 
 import com.arquiteture.core.exception.DomainException;
-import com.arquiteture.domain.model.auth.*;
-import com.arquiteture.domain.service.auth.client.KeycloakClient;
+import com.arquiteture.domain.entity.User;
+import com.arquiteture.domain.model.auth.AuthLogout;
+import com.arquiteture.domain.model.auth.AuthRequest;
+import com.arquiteture.domain.model.auth.AuthUser;
+import com.arquiteture.domain.repository.UserRepository;
+import com.arquiteture.domain.service.hash.HashService;
+import com.arquiteture.domain.service.jwt.JwtService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MultivaluedMap;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
 
 @ApplicationScoped
-public class AuthService implements IAuthService{
+public class AuthService implements IAuthService {
 
-    private static final String CLIENT_SECRET = "client_secret";
-    private static final String CLIENT_ID = "client_id";
-    private static final String GRANT_TYPE = "grant_type";
+    @Inject
+    UserRepository repository;
 
-    @RestClient
-    KeycloakClient keycloakClient;
+    @Inject
+    HashService hashService;
 
+    @Inject
+    JwtService jwtService;
 
     @Override
     public AuthUser token(AuthRequest request) throws DomainException, JsonProcessingException {
-        return getAcessToken(request);
-    }
-
-    private AuthUser getAcessToken(AuthRequest request) throws DomainException, JsonProcessingException {
-        if(request.grantType().equals(GrantType.PASSWORD)){
-            if(StringUtils.isBlank(request.username()) || StringUtils.isBlank(request.password())){
-                throw new DomainException("");
-            }
-
-            return AuthUser.createFromJwtToken(authUsingPassword(request.username(), request.password()));
+        if (StringUtils.isBlank(request.cpf()) || StringUtils.isBlank(request.password())) {
+            throw new DomainException("");
         }
 
-        throw new DomainException("");
-    }
+        final var user = authUsingPassword(request.cpf(), request.password());
+        final var token = getAcessToken(user);
 
-    private AuthToken authUsingPassword(final String username, final String password) {
-        MultivaluedMap<String, String> form = new MultivaluedHashMap<>();
-
-        form.add(GRANT_TYPE, "password");
-        form.add("username", username);
-        form.add("password", password);
-
-        return keycloakClient.authUsingPassword(form);
+        return AuthUser.createFromJwtToken(user, token);
     }
 
     @Override
     public AuthLogout logout(MultivaluedMap<String, String> params) {
-        var refresh_token = params.getFirst("refresh_token");
-
-        MultivaluedMap<String, String> form = new MultivaluedHashMap<>();
-        form.add("refresh_token", refresh_token);
-
-        return keycloakClient.logout(form);
+        return null;
     }
+
+    private String getAcessToken(User user) throws DomainException {
+
+        return jwtService.generateJwt(user);
+    }
+
+    private User authUsingPassword(final String cpf, final String password) throws DomainException {
+        final var passworEncrypted = hashService.getHashPassword(password);
+
+        var userOptional = repository.findByCpfAndPassword(cpf, passworEncrypted);
+        var user = userOptional.orElseThrow(() -> new DomainException("validation.auth.login.invalid"));
+        return user;
+    }
+
+
 }

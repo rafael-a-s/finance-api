@@ -1,35 +1,42 @@
 package com.arquiteture.domain.model.auth;
 
+import com.arquiteture.domain.entity.User;
+import com.arquiteture.domain.enums.Roles;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Getter;
 import lombok.Setter;
 import org.jose4j.jwt.consumer.InvalidJwtException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class AuthUser extends AuthToken {
+public class AuthUser{
 
     private String id;
     private String name;
-    private String email;
+    private String cpf;
+    private String acessToken;
     private List<String> roles;
 
-    public static AuthUser createFromJwtToken(AuthToken authToken) throws JsonProcessingException {
-        final var user = new AuthUser();
-        var claims = JwtClaims.getClaims(authToken.getAcessToken());
+    public static AuthUser createFromJwtToken(User user, String token) throws JsonProcessingException {
+        final var authUser = new AuthUser();
 
-        user.setId(claims.getSub());
-        user.setName(claims.getName());
-        user.setEmail(claims.getEmail());
-        user.setAcessToken(authToken.getAcessToken());
-        user.setRefreshToken(authToken.getRefreshToken());
-        user.setExpireIn(authToken.getExpireIn());
-        user.setJti(authToken.getJti());
-        user.setScope(authToken.getScope());
-        user.setTokenType(authToken.getTokenType());
+        authUser.setId(user.getId());
+        authUser.setName(user.getFirstName());
+        authUser.setCpf(user.getCpf());
+        authUser.setAcessToken(token);
+        authUser.setRoles(
+                user.getRoles()
+                        .stream()
+                        .map(Roles::getLabel)
+                        .collect(
+                                Collectors.toList()
+                        )
+        );
 
-        return user;
+
+        return authUser;
     }
 
 }
