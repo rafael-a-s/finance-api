@@ -10,10 +10,7 @@ import com.arquiteture.domain.service.user.IUserService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -39,10 +36,13 @@ public class UserResource extends BaseResource<User, UserRequestDTO, UserRespons
         return Response.created(location).build();
     }
 
-    @RolesAllowed("user")
-    @Override
-    public Response update(String id, UserRequestDTO request) throws DomainException, InvocationTargetException, IllegalAccessException {
-        return super.update(id, request);
+    @PUT
+    @Path("/v1/update-profile/{id}")
+    @RolesAllowed({"user"})
+    public Response updateProfile(@PathParam("id") String id, @Valid UserRequestDTO userRequestDTO) throws DomainException, InvocationTargetException, IllegalAccessException {
+
+        var entityUpdatedReponse = this.getService().update(id, this.getMapper().fromRequest(userRequestDTO));
+        return Response.ok(entityUpdatedReponse).build();
     }
 
     @Override
