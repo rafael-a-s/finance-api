@@ -44,7 +44,6 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
     }
 
     @POST
-    @RolesAllowed("admin")
     public Response create(@Valid R request) throws DomainException {
         var response = service.create(mapper.fromRequest(request), mapper::toResponse);
         return Response.status(Response.Status.CREATED).entity(response).build();
@@ -52,7 +51,6 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
 
     @Path("/{id}")
     @PUT
-    @RolesAllowed("admin")
     public Response update(@PathParam("id") String id, @Valid R request) throws DomainException, InvocationTargetException, IllegalAccessException {
         var response = service.update(id, mapper.fromRequest(request), mapper::toResponse);
         return Response.ok(response).build();
@@ -60,7 +58,6 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
 
     @Path("/{id}")
     @DELETE
-    @RolesAllowed("admin")
     public Response delete(@PathParam("id") String id) throws DomainException {
         service.delete(id);
 
