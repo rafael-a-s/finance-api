@@ -17,13 +17,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class MonthlyContributionRequestDTO {
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
-    @Min(value = 2, message = "validation.monthly-contribution.nameInvestiment.size.min")
-    @Max(value = 50, message = "validation.monthly-contribution.nameInvestiment.size.max")
+    @NotBlank(message = "{validation.field.not-blank}")
+    @NotNull(message = "{validation.field.not-null}")
+    @Min(value = 2, message = "{validation.monthly-contribution.nameInvestiment.size.min}")
+    @Max(value = 50, message = "{validation.monthly-contribution.nameInvestiment.size.max}")
     private String nameInvestiment;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
+    @NotNull(message = "{validation.field.not-null}")
     private BigDecimal value;
 }

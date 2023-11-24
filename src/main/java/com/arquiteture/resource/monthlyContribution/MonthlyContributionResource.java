@@ -6,9 +6,11 @@ import com.arquiteture.domain.model.monthlyContribution.IMonthlyContributionMapp
 import com.arquiteture.domain.model.monthlyContribution.MonthlyContributionRequestDTO;
 import com.arquiteture.domain.model.monthlyContribution.MonthlyContributionResponseDTO;
 import com.arquiteture.domain.service.monthlyContribution.IMonthlyContributionService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.Path;
 
 @Path("/monthly-contribution")
+@RolesAllowed({"user", "admin"})
 public class MonthlyContributionResource extends BaseResource<MonthlyContribution, MonthlyContributionRequestDTO, MonthlyContributionResponseDTO> {
 
     protected MonthlyContributionResource(final IMonthlyContributionService service, final IMonthlyContributionMapper mapper) {
