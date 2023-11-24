@@ -9,6 +9,7 @@ import com.arquiteture.domain.repository.UserRepository;
 import com.arquiteture.domain.service.hash.IHashService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.util.HashSet;
 
@@ -38,6 +39,15 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
+    @Transactional
+    public void activeInative(String id) throws DomainException {
+        var entity = getRepository().findByIdOptional(id).orElseThrow(() -> new DomainException("User not exist."));
+
+        entity.setActive(!entity.isActive());
+        getRepository().persist(entity);
+    }
+
+    @Override
     public void validate(User entity) throws DomainException {
         super.validate(entity);
     }
@@ -46,4 +56,5 @@ public class UserService extends BaseService<User> implements IUserService {
     public UserRepository getRepository() {
         return (UserRepository) super.getRepository();
     }
+
 }

@@ -45,6 +45,15 @@ public class UserResource extends BaseResource<User, UserRequestDTO, UserRespons
         return Response.ok(entityUpdatedReponse).build();
     }
 
+    @PATCH
+    @Path("/v1/active-inative/{id}")
+    @RolesAllowed({"user"})
+    public Response acticeInative(@PathParam("id") String id) throws DomainException {
+
+        getService().activeInative(id);
+        return Response.noContent().build();
+    }
+
     @Override
     protected IUserMapper getMapper() {
         return (IUserMapper) super.getMapper();
