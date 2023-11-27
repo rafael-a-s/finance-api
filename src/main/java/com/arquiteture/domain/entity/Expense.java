@@ -24,7 +24,7 @@ public class Expense extends BaseEntity {
     private String name;
 
     @Column(name = "day_discount")
-    private Integer dayDiscount;
+    private String dayDiscount;
 
     @Column(name = "expense_value")
     private Double value;

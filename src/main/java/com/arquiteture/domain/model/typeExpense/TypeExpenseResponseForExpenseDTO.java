@@ -1,23 +1,22 @@
-package com.arquiteture.domain.model.expense;
+package com.arquiteture.domain.model.typeExpense;
 
-import com.arquiteture.domain.model.typeExpense.TypeExpenseResponseForExpenseDTO;
+import com.arquiteture.domain.entity.Expense;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExpenseResponseDTO {
+public class TypeExpenseResponseForExpenseDTO {
 
     private String id;
-    private String name;
-    private String dayDiscount;
-    private Double value;
-    private TypeExpenseResponseForExpenseDTO typeExpense;
+    private String nameOfExpense;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private boolean active;

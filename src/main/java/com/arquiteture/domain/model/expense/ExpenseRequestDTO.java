@@ -1,15 +1,11 @@
 package com.arquiteture.domain.model.expense;
 
 import com.arquiteture.core.entity.BaseEntityRequest;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -17,23 +13,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ExpenseRequestDTO {
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
-    @Min(value = 2, message = "validation.expense.name.size.min")
-    @Max(value = 50, message = "validation.expense.name.size.max")
+    @NotBlank(message = "{validation.field.not-blank}")
+    @NotNull(message = "{validation.field.not-null}")
+    @Size(min = 2, max = 50, message = "{validation.expense.name.size}")
     private String name;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
-    @Min(value = 1, message = "validation.expense.dayDiscount.size.min")
-    @Max(value = 2, message = "validation.expense.dayDiscount.size.max")
-    private Integer dayDiscount;
+    @NotNull(message = "{validation.field.not-null}")
+    @NotBlank(message = "{validation.field.not-blank}")
+    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])$", message = "{validation.expense.dayDiscount.regex}")
+    private String dayDiscount;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
+    @Positive(message = "{validation.field.positive}")
+    @NotNull(message = "{validation.field.not-null}")
     private Double value;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
+    @NotNull(message = "{validation.field.not-null}")
     private BaseEntityRequest typeExpense;
 }
