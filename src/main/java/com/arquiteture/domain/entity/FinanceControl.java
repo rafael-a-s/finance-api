@@ -36,42 +36,42 @@ public class FinanceControl extends BaseEntity {
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
 
-    public BigDecimal getRemunerationMonth() {
+    public Double getRemunerationMonth() {
 
         return this.remunerations
                 .stream()
                 .map(Remuneration::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(Double.MIN_VALUE, Double::sum);
     }
 
-    public BigDecimal getTotalExpenseFixedMonth() {
+    public Double getTotalExpenseFixedMonth() {
 
         return this.expensesFixes
                 .stream()
                 .map(Expense::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(Double.MIN_VALUE, Double::sum);
     }
 
-    public BigDecimal getInvestimentMonth() {
+    public Double getInvestimentMonth() {
 
         return this.monthlyContributions
                 .stream()
                 .map(MonthlyContribution::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(Double.MIN_VALUE, Double::sum);
     }
 
-    public BigDecimal getSubTotalMonth() {
+    public Double getSubTotalMonth() {
 
-        BigDecimal totalRemuneration = getRemunerationMonth();
-        BigDecimal totalExpenses = getTotalExpenseFixedMonth();
-        BigDecimal totalInvestments = getInvestimentMonth();
+        Double totalRemuneration = getRemunerationMonth();
+        Double totalExpenses = getTotalExpenseFixedMonth();
+        Double totalInvestments = getInvestimentMonth();
 
-        BigDecimal totalMonthlySpending = totalExpenses.add(totalInvestments);
+        Double totalMonthlySpending = totalExpenses = totalInvestments;
 
-        return totalRemuneration.subtract(totalMonthlySpending);
+        return totalRemuneration - totalMonthlySpending;
     }
 
-    public BigDecimal getTotalToSpendForTheWeek() {
+    public Double getTotalToSpendForTheWeek() {
         LocalDate firstDayOfMonth = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1);
         LocalDate lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth());
 
@@ -82,8 +82,7 @@ public class FinanceControl extends BaseEntity {
 
         int totalWeek = weekNumberEnd - weekNumberStart + 1;
 
-        return getSubTotalMonth()
-                .divide(BigDecimal.valueOf(totalWeek));
+        return getSubTotalMonth() / totalWeek;
     }
 
     @Override

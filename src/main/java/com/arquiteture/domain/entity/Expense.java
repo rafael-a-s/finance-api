@@ -27,7 +27,7 @@ public class Expense extends BaseEntity {
     private Integer dayDiscount;
 
     @Column(name = "expense_value")
-    private BigDecimal value;
+    private Double value;
 
     @ManyToOne(targetEntity = TypeExpense.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "type_expense_id", referencedColumnName = "type_expense_id")

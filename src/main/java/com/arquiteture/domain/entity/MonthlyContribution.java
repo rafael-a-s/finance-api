@@ -27,7 +27,7 @@ public class MonthlyContribution extends BaseEntity {
     private String nameInvestiment;
 
     @Column(name = "monthly_contribution_value")
-    private BigDecimal value;
+    private Double value;
 
     @Override
     public String getId() {

@@ -28,7 +28,7 @@ public class Remuneration extends BaseEntity {
     private String provider;
 
     @Column(name = "value")
-    private BigDecimal value;
+    private Double value;
 
     @Column(name = "type_provider")
     private TypeRemunerationProvider typeRemunerationProvider;
