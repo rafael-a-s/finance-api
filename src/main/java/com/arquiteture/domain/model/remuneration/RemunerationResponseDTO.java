@@ -17,7 +17,7 @@ public class RemunerationResponseDTO {
 
     private String id;
     private String provider;
-    private BigDecimal value;
+    private Double value;
     private TypeRemunerationProvider typeRemunerationProvider;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;

@@ -24,5 +24,5 @@ public class MonthlyContributionRequestDTO {
     private String nameInvestiment;
 
     @NotNull(message = "{validation.field.not-null}")
-    private BigDecimal value;
+    private Double value;
 }

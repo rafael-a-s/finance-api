@@ -16,7 +16,7 @@ public class ExpenseResponseDTO {
     private String id;
     private String name;
     private Integer dayDiscount;
-    private BigDecimal value;
+    private Double value;
     private TypeExpenseResponseDTO typeExpense;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;

@@ -23,7 +23,7 @@ public class RemunerationRequestDTO {
 
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
-    private BigDecimal value;
+    private Double value;
 
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")

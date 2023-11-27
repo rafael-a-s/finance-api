@@ -15,7 +15,7 @@ public class MonthlyContributionResponseDTO {
 
     private String id;
     private String nameInvestiment;
-    private BigDecimal value;
+    private Double value;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private boolean active;
