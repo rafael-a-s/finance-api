@@ -24,23 +24,23 @@ class FinanceControl {
     - Expense[] expenseFixeds
     - MonthlyContribution[] monthlyContribution
 
-    + BigDecimal getRemunerationMonth()
-    + BigDecimal getTotalExpenseFixedMonth()
-    + BigDecimal getInvestimentMonth()
-    + BigDecimal getSubTotalMonth()
-    + BigDecimal getTotalToSpendForTheWeek()
+    + Double getRemunerationMonth()
+    + Double getTotalExpenseFixedMonth()
+    + Double getInvestimentMonth()
+    + Double getSubTotalMonth()
+    + Double getTotalToSpendForTheWeek()
 }
 
 class MonthlyContribution {
     - String id
     - String nameInvestiment
-    - BigDecimal value
+    - Double value
 }
 
 class Remuneration {
     - String id
     - String provider
-    - BigDecimal value
+    - Double value
     - TypeRemunerationProvider typeWageProvider
 }
 
@@ -62,7 +62,7 @@ class Expense {
     - String id
     - String name
     - Integer dayDiscount
-    - BigDecimal value
+    - Double value
 }
 
 class TypeExpense {
