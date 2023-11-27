@@ -17,15 +17,12 @@ public class RemunerationRequestDTO {
 
     @NotBlank(message = "validation.field.not-blank")
     @NotNull(message = "validation.field.not-null")
-    @Min(value = 2, message = "validation.remuneration.provider.size.min")
-    @Max(value = 50, message = "validation.remuneration.provider.size.max")
+    @Size(message = "{validation.remuneration.provider.size.min}", min = 2, max = 50)
     private String provider;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
+    @NotNull(message = "{validation.field.not-null}")
     private Double value;
 
-    @NotBlank(message = "validation.field.not-blank")
-    @NotNull(message = "validation.field.not-null")
+    @NotNull(message = "{validation.field.not-null}")
     private TypeRemunerationProvider typeRemunerationProvider;
 }
