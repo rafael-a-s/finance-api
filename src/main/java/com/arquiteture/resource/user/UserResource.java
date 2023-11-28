@@ -18,7 +18,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @Path("/user")
-@RolesAllowed({"user", "admin"})
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource extends BaseResource<User, UserRequestDTO, UserResponseDTO> {
