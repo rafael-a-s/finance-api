@@ -1,9 +1,7 @@
 package com.arquiteture.resource.typeExpense;
 
 import com.arquiteture.core.exception.DomainException;
-import com.arquiteture.core.mapper.IBaseMapper;
 import com.arquiteture.core.resource.BaseResource;
-import com.arquiteture.core.service.IBaseService;
 import com.arquiteture.domain.entity.TypeExpense;
 import com.arquiteture.domain.model.typeExpense.ITypeExpenseMapper;
 import com.arquiteture.domain.model.typeExpense.TypeExpenseRequestDTO;
