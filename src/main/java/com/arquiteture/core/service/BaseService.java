@@ -32,7 +32,17 @@ public abstract class BaseService<T extends BaseEntity> implements IBaseService<
     }
 
     @Override
-    public <U> T findById(String id, Function<T, ? extends U> converter) {
+    public List<T> listAll() {
+        return repository.listAll();
+    }
+
+    @Override
+    public <U> U findById(String id, Function<T, ? extends U> converter) throws DomainException {
+        return converter.apply(repository.findByIdOptional(id).orElseThrow(() -> new DomainException("User not found!")));
+    }
+
+    @Override
+    public T findById(String id) {
         return repository.findById(id);
     }
 

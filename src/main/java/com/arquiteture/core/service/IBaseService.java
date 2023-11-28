@@ -10,7 +10,11 @@ public interface IBaseService<T extends BaseEntity> {
 
     <U> List<U> listAll(Function<T, ? extends U> converter);
 
-    <U> T findById(String id, Function<T, ? extends U> converter);
+    List<T> listAll();
+
+    <U> U findById(String id, Function<T, ? extends U> converter) throws DomainException;
+
+    T findById(String id) throws DomainException;
 
     void validate(T entity) throws DomainException;
 

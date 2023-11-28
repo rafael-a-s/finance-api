@@ -38,7 +38,7 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
 
     @Path("/{id}")
     @GET
-    public Response findById(@PathParam("id") String id){
+    public Response findById(@PathParam("id") String id) throws DomainException {
         var response = service.findById(id, mapper::toResponse);
         return Response.ok(response).build();
     }
