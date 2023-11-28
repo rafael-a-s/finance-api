@@ -8,9 +8,11 @@ import com.arquiteture.domain.model.remuneration.RemunerationRequestDTO;
 import com.arquiteture.domain.model.remuneration.RemunerationResponseDTO;
 import com.arquiteture.domain.service.exemplo.IExemploService;
 import com.arquiteture.domain.service.remuneration.IRemunerationService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.Path;
 
 @Path("/remuneration")
+@RolesAllowed({"user", "admin"})
 public class RemunerationResource extends BaseResource<Remuneration, RemunerationRequestDTO, RemunerationResponseDTO> {
     protected RemunerationResource(final IRemunerationService service, final IRemunerationMapper mapper) {
         super(service, mapper);

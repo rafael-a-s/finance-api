@@ -8,6 +8,7 @@ import com.arquiteture.domain.model.financeControl.FinanceControlResponseDTO;
 import com.arquiteture.domain.model.financeControl.IFinanceControlMapper;
 import com.arquiteture.domain.service.financeControl.FinanceControlService;
 import com.arquiteture.domain.service.financeControl.IFinanceControlService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import java.net.URI;
 
 @Path("/finance-control")
+@RolesAllowed({"user", "admin"})
 public class FinanceControlResource extends BaseResource<FinanceControl, FinanceControlRequestDTO, FinanceControlResponseDTO> {
     protected FinanceControlResource(final IFinanceControlService service, IFinanceControlMapper mapper) {
         super(service, mapper);
