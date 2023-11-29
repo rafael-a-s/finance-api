@@ -4,11 +4,10 @@ import com.arquiteture.core.entity.BaseEntity;
 import com.arquiteture.core.exception.DomainException;
 import com.arquiteture.core.mapper.IBaseMapper;
 import com.arquiteture.core.service.IBaseService;
-import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -24,8 +23,8 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
 
     private final IBaseMapper<T, R, Q> mapper;
 
-    protected BaseResource(final IBaseService<T> service, final IBaseMapper<T, R, Q> mapper){
-        this.service =service;
+    protected BaseResource(final IBaseService<T> service, final IBaseMapper<T, R, Q> mapper) {
+        this.service = service;
         this.mapper = mapper;
     }
 
@@ -68,7 +67,7 @@ public abstract class BaseResource<T extends BaseEntity, R, Q> {
         return service;
     }
 
-    protected IBaseMapper<T, R, Q> getMapper(){
+    protected IBaseMapper<T, R, Q> getMapper() {
         return mapper;
     }
 
