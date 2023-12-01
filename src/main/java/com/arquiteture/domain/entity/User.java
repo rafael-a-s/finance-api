@@ -39,9 +39,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private Set<Roles> roles;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "finance_control_id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private FinanceControl financeControl;
 
     @Override

@@ -22,7 +22,7 @@ import java.util.Locale;
 public class FinanceControl extends BaseEntity {
 
     @Id
-    @Column(name = "finance_control_id")
+    @Column(name = "id_finance_control")
     private String id;
 
     @OneToMany(targetEntity = Remuneration.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -34,7 +34,10 @@ public class FinanceControl extends BaseEntity {
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
 
-    @OneToOne(mappedBy = "financeControl", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
     private User user;
 
     public Double getRemunerationMonth() {
