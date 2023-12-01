@@ -36,6 +36,11 @@ public class FinanceControl extends BaseEntity {
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
 
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User user;
+
     public Double getRemunerationMonth() {
 
         return this.remunerations

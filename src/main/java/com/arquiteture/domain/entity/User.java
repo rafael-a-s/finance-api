@@ -40,6 +40,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private Set<Roles> roles;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private FinanceControl financeControl;
+
     @Override
     public String getId() {
         return id;
