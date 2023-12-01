@@ -7,12 +7,19 @@ import com.arquiteture.domain.entity.FinanceControl;
 import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.entity.Remuneration;
 import com.arquiteture.domain.repository.FinanceControlRepository;
+import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.resource.spi.work.SecurityContext;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 @ApplicationScoped
 public class FinanceControlService extends BaseService<FinanceControl> implements IFinanceControlService {
+
+    @Inject
+    SecurityIdentity securityIdentity;
 
     protected FinanceControlService(final FinanceControlRepository repository) {
         super(repository);
@@ -47,7 +54,8 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     }
 
     private FinanceControl findUniqueFinanceControl() throws DomainException {
-        return getRepository().findAll().stream().findFirst().orElseThrow(() -> new DomainException("Finance Control not found!"));
+        String idUser = securityIdentity.getPrincipal().getName();
+        return getRepository().findFinanceControlForUser(idUser).orElseThrow(() -> new DomainException("ID user ivalid, financeControl not found."));
     }
 
     @Override
