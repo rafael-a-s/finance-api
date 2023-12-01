@@ -18,7 +18,6 @@ public class UserResponseDTO {
     private String lastName;
     private String cpf;
     private String email;
-    private String password;
     private Set<Roles> roles;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
