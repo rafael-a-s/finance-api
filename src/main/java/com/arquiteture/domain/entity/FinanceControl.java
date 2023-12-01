@@ -7,11 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,9 +34,7 @@ public class FinanceControl extends BaseEntity {
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
+    @OneToOne(mappedBy = "financeControl", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
 
     public Double getRemunerationMonth() {

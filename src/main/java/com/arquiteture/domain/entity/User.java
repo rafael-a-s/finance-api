@@ -1,7 +1,6 @@
 package com.arquiteture.domain.entity;
 
 import com.arquiteture.core.entity.BaseEntity;
-
 import com.arquiteture.domain.enums.Roles;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -40,7 +39,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     private Set<Roles> roles;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "finance_control_id")
     private FinanceControl financeControl;
 
     @Override
