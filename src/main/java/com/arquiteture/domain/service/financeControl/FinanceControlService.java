@@ -7,10 +7,12 @@ import com.arquiteture.domain.entity.FinanceControl;
 import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.entity.Remuneration;
 import com.arquiteture.domain.repository.FinanceControlRepository;
+import com.arquiteture.domain.service.user.IUserService;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.resource.spi.work.SecurityContext;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -19,7 +21,10 @@ import java.util.Objects;
 public class FinanceControlService extends BaseService<FinanceControl> implements IFinanceControlService {
 
     @Inject
-    SecurityIdentity securityIdentity;
+    JsonWebToken jsonWebToken;
+
+    @Inject
+    IUserService userService;
 
     protected FinanceControlService(final FinanceControlRepository repository) {
         super(repository);
@@ -31,7 +36,10 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     @Override
     public FinanceControl initializeFinanceControlInDataBase() throws DomainException {
 
+        var userForFinanceControl = userService.findById(jsonWebToken.getSubject());
+
         FinanceControl entity = new FinanceControl();
+        entity.setUser(userForFinanceControl);
 
         validate(entity);
         getRepository().persist(entity);
@@ -54,7 +62,7 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     }
 
     private FinanceControl findUniqueFinanceControl() throws DomainException {
-        String idUser = securityIdentity.getPrincipal().getName();
+        String idUser = jsonWebToken.getSubject();
         return getRepository().findFinanceControlForUser(idUser).orElseThrow(() -> new DomainException("ID user ivalid, financeControl not found."));
     }
 
