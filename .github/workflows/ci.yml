@@ -1,0 +1,51 @@
+name: CI build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: gcr.io
+  PROJECT_NAME: finance
+  PROJECT_VERSION: latest
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    environment: gcp-prod
+    env:
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/finance_api:latest
+
+    steps:
+      - name: Checkout gh-repo
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+          
+      # Login to GCP
+      - uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      # gcloud configure docker
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+    
+      - name: Build
+        run: ./gradlew build
+
+      # deploy image
+      - name: Deploy Docker image
+        run: gcloud run deploy finance_api --image $IMAGE_NAME --region us-central1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 80 --allow-unauthenticated
