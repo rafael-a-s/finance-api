@@ -9,7 +9,6 @@ on:
 
 env:
   REGISTRY: gcr.io
-  IMAGE_NAME: ${{ github.repository }}
   PROJECT_NAME: finance
   PROJECT_VERSION: latest
 
@@ -29,7 +28,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-          cache: maven
+          cache: gradle
           
       # Login to GCP
       - uses: google-github-actions/setup-gcloud@v0.2.0
