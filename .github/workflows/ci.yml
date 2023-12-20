@@ -39,6 +39,9 @@ jobs:
       # gcloud configure docker
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
     
       - name: Build
         run: ./gradlew build
