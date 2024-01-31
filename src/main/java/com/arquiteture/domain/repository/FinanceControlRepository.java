@@ -10,6 +10,6 @@ import java.util.Optional;
 public class FinanceControlRepository implements IBaseRepository<FinanceControl> {
 
     public Optional<FinanceControl> findFinanceControlForUser(String idUser) {
-        return find("id_user = ?1", idUser).firstResultOptional();
+        return find("user.id = ?1", idUser).firstResultOptional();
     }
 }
