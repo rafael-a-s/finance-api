@@ -34,6 +34,11 @@ public class MonthlyContributionService extends BaseService<MonthlyContribution>
     }
 
     @Override
+    public void delete(String id) throws DomainException {
+        financeControlService.deleteMonthlyContribution(id);
+    }
+
+    @Override
     public List<MonthlyContribution> listAll() throws DomainException{
         return financeControlService.getAllMonthlyContibutionOfUserUsingSubject();
     }

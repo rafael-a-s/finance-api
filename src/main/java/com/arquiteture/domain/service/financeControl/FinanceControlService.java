@@ -17,6 +17,7 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FinanceControlService extends BaseService<FinanceControl> implements IFinanceControlService {
@@ -108,6 +109,17 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
         var financeControl = findUniqueFinanceControl();
 
         return financeControl.getMonthlyContributions();
+    }
+
+    @Override
+    public void deleteMonthlyContribution(String id) throws DomainException {
+        FinanceControl financeControls = findUniqueFinanceControl();
+        financeControls.getMonthlyContributions()
+                .stream()
+                .filter(e -> !Objects.equals(e.getId(), id))
+                .collect(Collectors.toList());
+
+        getRepository().persist(financeControls);
     }
 
     @Override
