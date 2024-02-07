@@ -15,6 +15,7 @@ import jakarta.resource.spi.work.SecurityContext;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
@@ -100,6 +101,13 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
         entity.getMonthlyContributions().add(monthlyContribution);
 
         getRepository().persist(entity);
+    }
+
+    @Override
+    public List<MonthlyContribution> getAllMonthlyContibutionOfUserUsingSubject() throws DomainException {
+        var financeControl = findUniqueFinanceControl();
+
+        return financeControl.getMonthlyContributions();
     }
 
     @Override
