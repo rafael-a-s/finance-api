@@ -9,6 +9,8 @@ import com.arquiteture.domain.service.financeControl.IFinanceControlService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
+
 @ApplicationScoped
 public class MonthlyContributionService extends BaseService<MonthlyContribution> implements IMonthlyContributionService {
 
@@ -29,6 +31,11 @@ public class MonthlyContributionService extends BaseService<MonthlyContribution>
         financeControlService.addMonthlyContribution(entity);
 
         return entity;
+    }
+
+    @Override
+    public List<MonthlyContribution> listAll() throws DomainException{
+        return financeControlService.getAllMonthlyContibutionOfUserUsingSubject();
     }
 
     @Override
