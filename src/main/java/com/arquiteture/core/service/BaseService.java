@@ -32,7 +32,7 @@ public abstract class BaseService<T extends BaseEntity> implements IBaseService<
     }
 
     @Override
-    public List<T> listAll() {
+    public List<T> listAll() throws DomainException {
         return repository.listAll();
     }
 
