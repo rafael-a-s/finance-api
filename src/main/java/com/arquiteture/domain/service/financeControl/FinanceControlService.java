@@ -8,10 +8,8 @@ import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.entity.Remuneration;
 import com.arquiteture.domain.repository.FinanceControlRepository;
 import com.arquiteture.domain.service.user.IUserService;
-import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.resource.spi.work.SecurityContext;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.ArrayList;
@@ -114,10 +112,7 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     @Override
     public void deleteMonthlyContribution(String id) throws DomainException {
         FinanceControl financeControls = findUniqueFinanceControl();
-        financeControls.getMonthlyContributions()
-                .stream()
-                .filter(e -> !Objects.equals(e.getId(), id))
-                .collect(Collectors.toList());
+        financeControls.getMonthlyContributions().removeIf((v) -> v.getId().equals(id));
 
         getRepository().persist(financeControls);
     }
