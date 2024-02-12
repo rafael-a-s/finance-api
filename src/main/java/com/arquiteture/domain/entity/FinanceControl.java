@@ -70,7 +70,7 @@ public class FinanceControl extends BaseEntity {
         Double totalExpenses = getTotalExpenseFixedMonth();
         Double totalInvestments = getInvestimentMonth();
 
-        Double totalMonthlySpending = totalExpenses = totalInvestments;
+        Double totalMonthlySpending = totalExpenses + totalInvestments;
 
         return totalRemuneration - totalMonthlySpending;
     }
