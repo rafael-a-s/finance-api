@@ -1,8 +1,6 @@
 package com.arquiteture.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.criteria.CriteriaBuilder;
-
 import java.util.Objects;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)

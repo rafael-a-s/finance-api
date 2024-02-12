@@ -1,7 +1,6 @@
 package com.arquiteture.core.mapper;
 
 import com.arquiteture.core.entity.BaseEntity;
-import org.mapstruct.Mapping;
 
 /**
  *

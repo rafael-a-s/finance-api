@@ -15,7 +15,6 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class FinanceControlService extends BaseService<FinanceControl> implements IFinanceControlService {

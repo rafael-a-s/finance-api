@@ -1,6 +1,5 @@
 package com.arquiteture.domain.model.expense;
 
-import com.arquiteture.domain.model.typeExpense.TypeExpenseResponseForExpenseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

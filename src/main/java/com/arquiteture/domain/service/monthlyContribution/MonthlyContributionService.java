@@ -1,7 +1,6 @@
 package com.arquiteture.domain.service.monthlyContribution;
 
 import com.arquiteture.core.exception.DomainException;
-import com.arquiteture.core.repository.IBaseRepository;
 import com.arquiteture.core.service.BaseService;
 import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.repository.MonthlyContributionRepository;

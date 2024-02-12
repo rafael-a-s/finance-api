@@ -1,14 +1,10 @@
 package com.arquiteture.domain.service.typeExpense;
 
 import com.arquiteture.core.exception.DomainException;
-import com.arquiteture.core.repository.IBaseRepository;
 import com.arquiteture.core.service.BaseService;
-import com.arquiteture.domain.entity.Remuneration;
 import com.arquiteture.domain.entity.TypeExpense;
-import com.arquiteture.domain.repository.RemunerationRepository;
 import com.arquiteture.domain.repository.TypeExpenseRepository;
 import com.arquiteture.domain.service.expense.IExpenseService;
-import com.arquiteture.domain.service.remuneration.IRemunerationService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

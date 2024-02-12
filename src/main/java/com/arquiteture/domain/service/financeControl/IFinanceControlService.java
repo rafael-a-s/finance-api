@@ -6,9 +6,6 @@ import com.arquiteture.domain.entity.Expense;
 import com.arquiteture.domain.entity.FinanceControl;
 import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.entity.Remuneration;
-import com.arquiteture.domain.model.expense.ExpenseRequestDTO;
-import com.arquiteture.domain.model.financeControl.FinanceControlResponseDTO;
-
 import java.util.List;
 
 public interface IFinanceControlService extends IBaseService<FinanceControl> {

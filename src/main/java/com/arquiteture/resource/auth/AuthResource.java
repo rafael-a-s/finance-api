@@ -3,7 +3,6 @@ package com.arquiteture.resource.auth;
 import com.arquiteture.core.exception.DomainException;
 import com.arquiteture.domain.model.auth.AuthLogout;
 import com.arquiteture.domain.model.auth.AuthRequest;
-import com.arquiteture.domain.model.auth.AuthToken;
 import com.arquiteture.domain.model.auth.AuthUser;
 import com.arquiteture.domain.service.auth.AuthService;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -5,7 +5,6 @@ import com.arquiteture.domain.enums.Roles;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Getter;
 import lombok.Setter;
-import org.jose4j.jwt.consumer.InvalidJwtException;
 import java.util.List;
 import java.util.stream.Collectors;
 
