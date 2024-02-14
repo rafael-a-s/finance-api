@@ -2,10 +2,7 @@ package com.arquiteture.domain.service.financeControl;
 
 import com.arquiteture.core.exception.DomainException;
 import com.arquiteture.core.service.BaseService;
-import com.arquiteture.domain.entity.Expense;
-import com.arquiteture.domain.entity.FinanceControl;
-import com.arquiteture.domain.entity.MonthlyContribution;
-import com.arquiteture.domain.entity.Remuneration;
+import com.arquiteture.domain.entity.*;
 import com.arquiteture.domain.repository.FinanceControlRepository;
 import com.arquiteture.domain.service.user.IUserService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -66,18 +63,6 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     }
 
     @Override
-    public void addExpense(Expense expense) throws DomainException {
-        var entity = findUniqueFinanceControl();
-        if (Objects.isNull(entity.getExpensesFixes())) {
-            entity.setExpensesFixes(new ArrayList<>());
-        }
-
-        entity.getExpensesFixes().add(expense);
-
-        getRepository().persist(entity);
-    }
-
-    @Override
     public void addRemuneration(Remuneration remuneration) throws DomainException {
         var entity = findUniqueFinanceControl();
         if (Objects.isNull(entity.getRemunerations())) {
@@ -85,6 +70,18 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
         }
 
         entity.getRemunerations().add(remuneration);
+
+        getRepository().persist(entity);
+    }
+
+    @Override
+    public void addTypeExpense(TypeExpense typeExpense) throws DomainException {
+        var entity = findUniqueFinanceControl();
+        if (Objects.isNull(entity.getTypeExpenses())) {
+            entity.setTypeExpenses(new ArrayList<>());
+        }
+
+        entity.getTypeExpenses().add(typeExpense);
 
         getRepository().persist(entity);
     }

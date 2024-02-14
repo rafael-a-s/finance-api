@@ -27,8 +27,6 @@ public class ExpenseService extends BaseService<Expense> implements IExpenseServ
         validate(entity);
         getRepository().persist(entity);
 
-        financeControlService.addExpense(entity);
-
         return entity;
     }
 

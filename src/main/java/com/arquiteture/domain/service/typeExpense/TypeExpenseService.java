@@ -5,6 +5,7 @@ import com.arquiteture.core.service.BaseService;
 import com.arquiteture.domain.entity.TypeExpense;
 import com.arquiteture.domain.repository.TypeExpenseRepository;
 import com.arquiteture.domain.service.expense.IExpenseService;
+import com.arquiteture.domain.service.financeControl.IFinanceControlService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -15,6 +16,9 @@ public class TypeExpenseService extends BaseService<TypeExpense> implements ITyp
     @Inject
     IExpenseService expenseService;
 
+    @Inject
+    IFinanceControlService financeControlService;
+
     protected TypeExpenseService (final TypeExpenseRepository repository){
         super(repository);
     }
@@ -24,6 +28,16 @@ public class TypeExpenseService extends BaseService<TypeExpense> implements ITyp
     @Override
     public TypeExpenseRepository getRepository() {
         return (TypeExpenseRepository) super.getRepository();
+    }
+
+    @Override
+    public TypeExpense create(TypeExpense entity) throws DomainException {
+        validate(entity);
+        getRepository().persist(entity);
+
+        financeControlService.addTypeExpense(entity);
+
+        return entity;
     }
 
     @Override

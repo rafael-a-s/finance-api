@@ -28,8 +28,8 @@ public class FinanceControl extends BaseEntity {
     @OneToMany(targetEntity = Remuneration.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Remuneration> remunerations;
 
-    @OneToMany(targetEntity = Expense.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Expense> expensesFixes;
+    @OneToMany(targetEntity = TypeExpense.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TypeExpense> typeExpenses;
 
     @OneToMany(targetEntity = MonthlyContribution.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyContribution> monthlyContributions;
@@ -48,14 +48,6 @@ public class FinanceControl extends BaseEntity {
                 .reduce(Double.MIN_VALUE, Double::sum);
     }
 
-    public Double getTotalExpenseFixedMonth() {
-
-        return this.expensesFixes
-                .stream()
-                .map(Expense::getValue)
-                .reduce(Double.MIN_VALUE, Double::sum);
-    }
-
     public Double getInvestimentMonth() {
 
         return this.monthlyContributions
@@ -67,12 +59,10 @@ public class FinanceControl extends BaseEntity {
     public Double getSubTotalMonth() {
 
         Double totalRemuneration = getRemunerationMonth();
-        Double totalExpenses = getTotalExpenseFixedMonth();
         Double totalInvestments = getInvestimentMonth();
 
-        Double totalMonthlySpending = totalExpenses + totalInvestments;
 
-        return totalRemuneration - totalMonthlySpending;
+        return totalRemuneration;
     }
 
     public Double getTotalToSpendForTheWeek() {

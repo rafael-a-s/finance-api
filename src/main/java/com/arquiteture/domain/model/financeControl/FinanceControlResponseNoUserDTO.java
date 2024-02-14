@@ -7,6 +7,7 @@ import com.arquiteture.domain.model.expense.ExpenseResponseDTO;
 import com.arquiteture.domain.model.monthlyContribution.MonthlyContributionResponseDTO;
 import com.arquiteture.domain.model.remuneration.RemunerationResponseDTO;
 
+import com.arquiteture.domain.model.typeExpense.TypeExpenseResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class FinanceControlResponseNoUserDTO {
     private String id;
     private List<RemunerationResponseDTO> remunerations;
-    private List<ExpenseResponseDTO> expensesFixes;
+    private List<TypeExpenseResponseDTO> typeExpenses;
     private List<MonthlyContributionResponseDTO> monthlyContributions;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
