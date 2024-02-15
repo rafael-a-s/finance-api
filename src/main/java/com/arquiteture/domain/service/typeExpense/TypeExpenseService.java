@@ -41,6 +41,11 @@ public class TypeExpenseService extends BaseService<TypeExpense> implements ITyp
     }
 
     @Override
+    public void delete(String id) throws DomainException {
+        financeControlService.deleteTypeExpense(id);
+    }
+
+    @Override
     @Transactional
     public void removeExpense(String id) throws DomainException {
         var expenseForRemove = expenseService.findById(id);

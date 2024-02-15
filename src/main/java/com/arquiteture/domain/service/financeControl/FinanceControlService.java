@@ -114,6 +114,14 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     }
 
     @Override
+    public void deleteTypeExpense(String id) throws DomainException {
+        FinanceControl financeControl = findUniqueFinanceControl();
+
+        financeControl.getTypeExpenses().removeIf((t) -> t.getId().equals(id));
+        getRepository().persist(financeControl);
+    }
+
+    @Override
     public FinanceControlRepository getRepository() {
         return (FinanceControlRepository) super.getRepository();
     }

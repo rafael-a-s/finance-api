@@ -22,4 +22,6 @@ public interface IFinanceControlService extends IBaseService<FinanceControl> {
     List<MonthlyContribution> getAllMonthlyContibutionOfUserUsingSubject() throws DomainException;
 
     void deleteMonthlyContribution(String id) throws DomainException;
+
+    void deleteTypeExpense(String id) throws DomainException;
 }
