@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class ExpenseService extends BaseService<Expense> implements IExpenseService {
 
     @Inject
-    IFinanceControlService financeControlService;
+    ITypeExpenseService typeExpenseService;
 
     protected ExpenseService(final ExpenseRepository repository, final ITypeExpenseService typeExpenseService) {
         super(repository);
@@ -37,7 +37,7 @@ public class ExpenseService extends BaseService<Expense> implements IExpenseServ
 
     @Override
     public void delete(String id) throws DomainException {
-        throw new DomainException("Method blocked!");
+        typeExpenseService.removeExpense(id);
     }
 
     @Override
