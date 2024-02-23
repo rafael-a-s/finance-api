@@ -122,6 +122,14 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
     }
 
     @Override
+    public void deleteRemuneration(String id) throws DomainException {
+        var financeControl = findUniqueFinanceControl();
+        financeControl.getRemunerations().removeIf((r) -> r.getId().equals(id));
+
+        getRepository().persist(financeControl);
+    }
+
+    @Override
     public FinanceControlRepository getRepository() {
         return (FinanceControlRepository) super.getRepository();
     }

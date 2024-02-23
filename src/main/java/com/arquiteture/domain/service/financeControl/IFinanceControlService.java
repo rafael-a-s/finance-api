@@ -24,4 +24,6 @@ public interface IFinanceControlService extends IBaseService<FinanceControl> {
     void deleteMonthlyContribution(String id) throws DomainException;
 
     void deleteTypeExpense(String id) throws DomainException;
+
+    void deleteRemuneration(String id) throws DomainException;
 }

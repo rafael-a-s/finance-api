@@ -32,6 +32,11 @@ public class RemunerationService extends BaseService<Remuneration> implements IR
     }
 
     @Override
+    public void delete(String id) throws DomainException {
+        financeControlService.deleteRemuneration(id);
+    }
+
+    @Override
     public RemunerationRepository getRepository() {
         return (RemunerationRepository) super.getRepository();
     }
