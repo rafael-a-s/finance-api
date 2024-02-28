@@ -3,6 +3,7 @@ package com.arquiteture.domain.service.financeControl;
 import com.arquiteture.core.exception.DomainException;
 import com.arquiteture.core.service.BaseService;
 import com.arquiteture.domain.entity.*;
+import com.arquiteture.domain.model.financeControl.FinanceMetricsResponseDTO;
 import com.arquiteture.domain.repository.FinanceControlRepository;
 import com.arquiteture.domain.service.user.IUserService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -127,6 +128,21 @@ public class FinanceControlService extends BaseService<FinanceControl> implement
         financeControl.getRemunerations().removeIf((r) -> r.getId().equals(id));
 
         getRepository().persist(financeControl);
+    }
+
+    @Override
+    public FinanceMetricsResponseDTO financeControlMetrics() throws DomainException {
+        var financeControl = findUniqueFinanceControl();
+        return FinanceMetricsResponseDTO
+                .builder()
+                .subTotalForMonth(financeControl.getSubTotalMonth())
+                .totalInvestimentMonth(financeControl.getInvestimentMonth())
+                .totalRemuneration(financeControl.getTotalRemunerationMonth())
+                .totalSpendForWeek(financeControl.getTotalToSpendForTheWeek())
+                .totalExpenses(financeControl.getTotalExpense())
+                .build();
+
+
     }
 
     @Override

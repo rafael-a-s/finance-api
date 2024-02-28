@@ -40,7 +40,7 @@ public class FinanceControl extends BaseEntity {
     @JoinColumn(name = "id_user")
     private User user;
 
-    public Double getRemunerationMonth() {
+    public Double getTotalRemunerationMonth() {
 
         return this.remunerations
                 .stream()
@@ -58,11 +58,19 @@ public class FinanceControl extends BaseEntity {
 
     public Double getSubTotalMonth() {
 
-        Double totalRemuneration = getRemunerationMonth();
+        Double totalRemuneration = getTotalRemunerationMonth();
         Double totalInvestments = getInvestimentMonth();
+        Double totalExpense = getTotalExpense();
 
 
-        return totalRemuneration;
+        return totalRemuneration - (totalExpense + totalInvestments);
+    }
+
+    public Double getTotalExpense() {
+        return this.getTypeExpenses()
+                .stream()
+                .map(TypeExpense::getTotalExpense)
+                .reduce(Double.MIN_VALUE, Double::sum);
     }
 
     public Double getTotalToSpendForTheWeek() {

@@ -27,6 +27,13 @@ public class TypeExpense extends BaseEntity {
     @OneToMany(targetEntity = Expense.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "typeExpense", orphanRemoval = true)
     private List<Expense> expenses;
 
+    public Double getTotalExpense() {
+        return this.getExpenses()
+                .stream()
+                .map(Expense::getValue)
+                .reduce(Double.MIN_VALUE, Double::sum);
+    }
+
     @Override
     public String getId() {
         return this.id;

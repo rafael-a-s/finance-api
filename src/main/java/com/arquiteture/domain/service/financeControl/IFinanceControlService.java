@@ -6,6 +6,7 @@ import com.arquiteture.domain.entity.FinanceControl;
 import com.arquiteture.domain.entity.MonthlyContribution;
 import com.arquiteture.domain.entity.Remuneration;
 import com.arquiteture.domain.entity.TypeExpense;
+import com.arquiteture.domain.model.financeControl.FinanceMetricsResponseDTO;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface IFinanceControlService extends IBaseService<FinanceControl> {
     void deleteTypeExpense(String id) throws DomainException;
 
     void deleteRemuneration(String id) throws DomainException;
+
+    FinanceMetricsResponseDTO financeControlMetrics() throws DomainException;
 }
